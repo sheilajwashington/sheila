@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheila J. Washington | Book Marketing</title>
+<meta name="description" content="Sheila J. Washington is a book marketer building launch strategy, press relations, and reader buzz campaigns for authors and independent presses.">
+
+<!-- ============================================================
+     FONTS
+     Fraunces = display serif for headlines (bold, characterful)
+     Libre Franklin = body and UI text
+     Space Mono = small labels, eyebrows, timeline numbers
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,500;1,9..144,600&family=Libre+Franklin:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   Palette: deep navy black base, vivid blue, warm gold.
+   No white surfaces anywhere on the page by request.
+============================================================ */
+:root{
+  --bg:#0A0F1E;
+  --bg-alt:#0E1526;
+  --panel:#121B34;
+  --panel-2:#16213F;
+  --navy-deep:#060910;
+
+  --blue:#2F6FED;
+  --blue-bright:#5FA0FF;
+  --blue-deep:#132B7C;
+  --blue-glow:rgba(47,111,237,0.25);
+
+  --gold:#F2B33D;
+  --gold-deep:#C3860F;
+  --gold-light:#FFDD8A;
+  --gold-glow:rgba(242,179,61,0.25);
+
+  --heading:#F7F3E8;
+  --text:#D7DEF2;
+  --text-soft:#B6C0DE;
+  --text-dim:#8B96BE;
+  --line:rgba(247,243,232,0.12);
+  --line-soft:rgba(247,243,232,0.07);
+
+  --radius:10px;
+  --radius-lg:20px;
+  --ease:cubic-bezier(.16,.84,.44,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text-soft);
+  font-family:'Libre Franklin',sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:'Fraunces',serif;
+  font-weight:800;
+  letter-spacing:-0.015em;
+  color:var(--heading);
+  line-height:1.15;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+ul{list-style:none;}
+button,select{font-family:inherit;cursor:pointer;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px;}
+section{position:relative;}
+::selection{background:var(--gold);color:var(--navy-deep);}
+
+.eyebrow{
+  font-family:'Space Mono',monospace;font-weight:700;
+  font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:14px;color:var(--gold);
+}
+.eyebrow::before{content:'';width:28px;height:2px;background:currentColor;}
+.eyebrow.blue{color:var(--blue-bright);}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-stagger>*{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal-stagger.in>*{opacity:1;transform:translateY(0);}
+.reveal-stagger.in>*:nth-child(1){transition-delay:.04s;}
+.reveal-stagger.in>*:nth-child(2){transition-delay:.12s;}
+.reveal-stagger.in>*:nth-child(3){transition-delay:.2s;}
+.reveal-stagger.in>*:nth-child(4){transition-delay:.28s;}
+.reveal-stagger.in>*:nth-child(5){transition-delay:.36s;}
+.reveal-stagger.in>*:nth-child(6){transition-delay:.44s;}
+.reveal-stagger.in>*:nth-child(7){transition-delay:.52s;}
+.reveal-stagger.in>*:nth-child(8){transition-delay:.6s;}
+.reveal-stagger.in>*:nth-child(9){transition-delay:.68s;}
+.reveal-stagger.in>*:nth-child(10){transition-delay:.76s;}
+.reveal-stagger.in>*:nth-child(11){transition-delay:.84s;}
+.reveal-stagger.in>*:nth-child(12){transition-delay:.92s;}
+@media(prefers-reduced-motion:reduce){.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important;transition:none!important;}*{animation:none!important;}}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes shimmer{0%{background-position:0% center}50%{background-position:100% center}100%{background-position:0% center}}
+@keyframes blink{50%{opacity:0}}
+@keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes fadeSwap{0%{opacity:0;transform:translateY(6px)}10%{opacity:1;transform:translateY(0)}90%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-6px)}}
+
+/* ============================================================
+   PRELOADER
+============================================================ */
+#preloader{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:26px;transition:opacity .8s ease,visibility .8s ease;}
+#preloader.hide{opacity:0;visibility:hidden;}
+.pre-mark{font-family:'Fraunces',serif;font-weight:800;font-size:26px;color:var(--heading);letter-spacing:.01em;opacity:0;animation:prefade 1s ease .2s forwards;}
+@keyframes prefade{to{opacity:1}}
+.pre-line{width:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--gold));animation:preline 1.6s var(--ease) .4s infinite;}
+@keyframes preline{0%{width:0}50%{width:150px}100%{width:0}}
+.pre-sub{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim);opacity:0;animation:prefade 1s ease .6s forwards;}
+
+#scroll-progress{position:fixed;top:0;left:0;height:3px;z-index:9998;background:linear-gradient(90deg,var(--blue),var(--gold));width:0%;transition:width .1s linear;}
+
+/* ============================================================
+   ROTATING HOOK BAR — the very first thing a visitor sees.
+   This is the "hook" plus one of the rotating/lively elements.
+============================================================ */
+#hookbar{background:linear-gradient(120deg,var(--blue-deep),var(--navy-deep) 55%,#3a2506);padding:12px 0;overflow:hidden;border-bottom:1px solid var(--line-soft);}
+.hookbar-inner{display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;}
+.hookbar-inner .hb-star{color:var(--gold);font-size:13px;}
+#hookText{font-family:'Space Mono',monospace;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);animation:fadeSwap 4s ease infinite;}
+
+/* ============================================================
+   COOKIE CONSENT BAR
+============================================================ */
+#cookieBar{position:fixed;bottom:0;left:0;right:0;background:var(--navy-deep);color:rgba(247,243,232,.8);padding:20px 40px;z-index:9000;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;transform:translateY(100%);transition:transform .5s var(--ease);font-size:14px;border-top:1px solid var(--line);}
+#cookieBar.show{transform:translateY(0);}
+#cookieBar .cb-btns{display:flex;gap:10px;flex-shrink:0;}
+#cookieBar button{padding:11px 24px;border-radius:4px;font-size:13px;font-weight:700;border:none;}
+#cookieBar .cb-accept{background:var(--gold);color:var(--navy-deep);}
+#cookieBar .cb-decline{background:transparent;color:var(--text-dim);border:1px solid var(--line);}
+#cookieBar a{color:var(--gold-light);text-decoration:underline;}
+
+/* ============================================================
+   HEADER / NAV
+============================================================ */
+header{position:sticky;top:0;z-index:200;background:rgba(10,15,30,.85);backdrop-filter:blur(18px);transition:padding .4s ease,background .4s ease,box-shadow .4s ease;border-bottom:1px solid var(--line-soft);}
+header.scrolled{background:rgba(10,15,30,.97);box-shadow:0 10px 30px rgba(0,0,0,.35);}
+nav.wrap{display:flex;align-items:center;justify-content:space-between;padding:22px 40px;transition:padding .4s ease;}
+header.scrolled nav.wrap{padding:13px 40px;}
+.logo{font-family:'Fraunces',serif;font-weight:800;font-size:21px;color:var(--heading);display:flex;align-items:center;gap:10px;letter-spacing:-.01em;}
+.logo .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold-glow);}
+.navlinks{display:flex;gap:30px;align-items:center;}
+.navlinks a:not(.nav-cta){font-size:14px;font-weight:700;color:var(--text-soft);position:relative;padding:4px 0;transition:color .3s ease;}
+.navlinks a:not(.nav-cta)::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:linear-gradient(90deg,var(--blue-bright),var(--gold));transition:width .35s var(--ease);}
+.navlinks a:not(.nav-cta):hover{color:var(--heading);}
+.navlinks a:not(.nav-cta):hover::after{width:100%;}
+.nav-cta{background:linear-gradient(120deg,var(--blue),var(--blue-deep));color:#fff!important;padding:12px 26px;border-radius:30px;font-size:13.5px!important;font-weight:800;letter-spacing:.02em;transition:transform .3s ease,box-shadow .3s ease;box-shadow:0 8px 24px var(--blue-glow);}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px var(--gold-glow);}
+.menu-btn{display:none;background:none;border:none;}
+.menu-btn span{display:block;width:23px;height:2px;background:var(--heading);margin:5px 0;transition:transform .3s ease,opacity .3s ease;}
+.menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.menu-btn.open span:nth-child(2){opacity:0;}
+.menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn{display:inline-block;padding:16px 32px;font-size:14px;font-weight:800;letter-spacing:.03em;border-radius:30px;border:1px solid transparent;cursor:pointer;transition:all .35s var(--ease);position:relative;overflow:hidden;}
+.btn-primary{background:linear-gradient(120deg,var(--blue),var(--blue-deep));color:#fff;box-shadow:0 10px 26px var(--blue-glow);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 34px var(--gold-glow);}
+.btn-gold{background:linear-gradient(120deg,var(--gold),var(--gold-deep));color:var(--navy-deep);box-shadow:0 10px 26px var(--gold-glow);}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 16px 34px var(--blue-glow);}
+.btn-ghost{border-color:var(--line);color:var(--heading);background:var(--panel);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-light);}
+
+/* ============================================================
+   PHOTO FRAMES — real images, bold gold framing
+============================================================ */
+.photo-frame{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:2px solid var(--line);background:var(--panel);box-shadow:0 30px 60px rgba(0,0,0,.4);}
+.photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo-hero{aspect-ratio:3/4;border-color:var(--gold-glow);box-shadow:0 30px 70px rgba(242,179,61,.18);}
+.photo-about{aspect-ratio:3/4;}
+.photo-footer{width:58px;height:58px;border-radius:50%;flex-shrink:0;}
+
+.sec-head{max-width:640px;margin-bottom:64px;}
+.sec-head h2{font-size:clamp(30px,3.6vw,44px);margin-top:18px;font-weight:800;}
+.sec-head p{color:var(--text-dim);font-size:16.5px;margin-top:18px;}
+
+/* ============================================================
+   HERO — bold, professional, the primary hook section
+============================================================ */
+.hero{padding:110px 0 100px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-220px;right:-200px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,var(--blue-glow),transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-140px;left:-160px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,var(--gold-glow),transparent 70%);pointer-events:none;}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.hero h1{font-size:clamp(44px,5.6vw,70px);margin:26px 0 28px;font-weight:900;line-height:1.05;}
+.hero h1 em{font-style:italic;background:linear-gradient(100deg,var(--blue-bright),var(--gold) 65%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shimmer 6s ease infinite;}
+.typewrap{height:24px;margin-bottom:20px;}
+#typewriter{font-family:'Space Mono',monospace;font-weight:700;font-size:13.5px;color:var(--gold-light);letter-spacing:.06em;}
+#typewriter .cursor-blink{display:inline-block;width:7px;background:var(--gold-light);margin-left:2px;animation:blink 1s steps(1) infinite;}
+.hero p.lede{font-size:18.5px;color:var(--text-soft);max-width:480px;margin-bottom:42px;line-height:1.8;}
+.btn-row{display:flex;gap:16px;flex-wrap:wrap;}
+
+.shape{position:absolute;pointer-events:none;z-index:0;border-radius:50%;}
+.shape-ring{border:1px solid var(--line);opacity:.6;}
+.shape-dot{background:var(--gold);opacity:.35;}
+
+.ticker-wrap{margin-top:74px;padding-top:30px;border-top:1px solid var(--line-soft);overflow:hidden;position:relative;z-index:1;}
+.ticker-label{font-family:'Space Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block;}
+.ticker{display:flex;gap:50px;white-space:nowrap;animation:scroll-left 40s linear infinite;width:max-content;}
+.ticker span{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--text-dim);}
+.ticker span b{color:var(--heading);font-style:normal;font-weight:800;}
+
+.press-strip{background:var(--navy-deep);padding:26px 0;overflow:hidden;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.press-marquee{display:flex;gap:80px;width:max-content;animation:scroll-left 28s linear infinite;}
+.press-marquee span{font-family:'Space Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);white-space:nowrap;}
+.press-marquee span b{color:var(--gold-light);font-weight:700;}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+.about{padding:130px 0;background:var(--bg);}
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;align-items:start;}
+.stat-row{display:flex;margin-top:44px;border-top:1px solid var(--line);}
+.stat{flex:1;padding:26px 20px 6px 0;}
+.stat .num{font-family:'Fraunces',serif;font-size:42px;font-weight:900;background:linear-gradient(120deg,var(--blue-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.stat .lbl{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-top:4px;}
+.about-copy p{margin-bottom:20px;font-size:16.5px;color:var(--text-soft);max-width:560px;line-height:1.85;}
+
+/* ============================================================
+   PROCESS — tabbed timeline
+============================================================ */
+.process{padding:130px 0;background:var(--panel);}
+.tab-row{display:flex;gap:8px;margin-bottom:50px;flex-wrap:wrap;}
+.tab-btn{padding:13px 26px;border-radius:30px;background:var(--bg-alt);color:var(--text-dim);font-size:13.5px;font-weight:800;letter-spacing:.02em;border:1px solid var(--line);transition:all .3s ease;}
+.tab-btn.active{background:linear-gradient(120deg,var(--blue),var(--blue-deep));color:#fff;border-color:transparent;}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold-light);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.tl-item{display:grid;grid-template-columns:56px 1fr;gap:28px;padding:32px 0;}
+.tl-item+.tl-item{border-top:1px solid var(--line-soft);}
+.tl-num{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--gold-light);width:48px;height:48px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--bg-alt);}
+.tl-content .tl-tag{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--blue-bright);display:block;margin-bottom:10px;}
+.tl-content h3{font-size:22px;margin-bottom:10px;font-weight:800;}
+.tl-content p{font-size:15px;color:var(--text-dim);max-width:580px;line-height:1.8;}
+
+/* ============================================================
+   SERVICES — every service has an icon (logo)
+============================================================ */
+.services{padding:130px 0;background:var(--bg);}
+.core-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-bottom:70px;border-radius:var(--radius-lg);overflow:hidden;}
+.core-card{background:var(--bg-alt);padding:44px 34px;transition:background .4s ease;}
+.core-card:hover{background:var(--panel-2);}
+.svc-icon{width:38px;height:38px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:22px;display:block;}
+.core-card h3{font-size:20px;margin-bottom:12px;font-weight:800;}
+.core-card p{font-size:14.5px;color:var(--text-dim);line-height:1.8;}
+.toolkit-heading{margin-bottom:28px;font-weight:800;font-size:24px;}
+.toolkit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border-radius:var(--radius-lg);overflow:hidden;}
+.toolkit-item{background:var(--bg-alt);padding:28px 22px;display:flex;align-items:flex-start;gap:16px;transition:background .35s ease;}
+.toolkit-item:hover{background:var(--panel-2);}
+.toolkit-item .svc-icon{width:26px;height:26px;flex-shrink:0;margin-bottom:0;stroke:var(--blue-bright);}
+.toolkit-item .ti-text{font-size:13.5px;font-weight:800;color:var(--heading);line-height:1.4;}
+
+/* ============================================================
+   SUCCESS STORIES — merged portfolio + testimonial, rotating
+============================================================ */
+.stories{padding:130px 0;background:var(--panel);}
+.story-slider{position:relative;}
+.story-card{display:none;grid-template-columns:0.6fr 1.4fr;gap:50px;align-items:center;}
+.story-card.active{display:grid;animation:testiFade .6s ease;}
+@keyframes testiFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.story-cover{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:2/3;box-shadow:0 30px 60px rgba(0,0,0,.45);border:1px solid var(--line);}
+.story-cover img{width:100%;height:100%;object-fit:cover;}
+.story-body .tag{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);}
+.story-body h3{font-size:26px;margin:14px 0 4px;font-weight:800;}
+.story-body .byline{font-size:14px;color:var(--text-dim);margin-bottom:16px;font-style:italic;font-family:'Fraunces',serif;}
+.story-body p{font-size:15.5px;color:var(--text-soft);margin-bottom:16px;line-height:1.85;}
+.story-focus{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-bright);}
+.story-dots{display:flex;gap:10px;justify-content:center;margin-top:44px;}
+.story-dot{width:10px;height:10px;border-radius:50%;background:var(--line);border:none;transition:background .3s ease,transform .3s ease;}
+.story-dot.active{background:var(--gold);transform:scale(1.25);}
+.sheila-words{max-width:820px;margin:80px auto 0;background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius-lg);padding:44px 42px;position:relative;}
+.sheila-words::before{content:'\201C';position:absolute;top:-6px;left:26px;font-family:'Fraunces',serif;font-size:100px;color:var(--blue-glow);line-height:1;}
+.sheila-words p{font-family:'Fraunces',serif;font-style:italic;font-size:18.5px;line-height:1.75;color:var(--heading);position:relative;z-index:1;}
+.sheila-words .sw-sign{margin-top:24px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);}
+
+/* ============================================================
+   PRICING
+============================================================ */
+.pricing{padding:130px 0;background:var(--bg);}
+.toggle-row{display:flex;align-items:center;gap:16px;margin-bottom:52px;}
+.toggle-row span{font-size:13.5px;color:var(--text-dim);font-weight:700;}
+.toggle-row span.active-label{color:var(--heading);}
+.switch{width:50px;height:27px;background:var(--panel);border-radius:20px;border:1px solid var(--line);position:relative;cursor:pointer;}
+.switch::before{content:'';position:absolute;top:2px;left:3px;width:21px;height:21px;border-radius:50%;background:linear-gradient(120deg,var(--blue),var(--blue-deep));transition:transform .35s var(--ease);}
+.switch.on::before{transform:translateX(22px);background:linear-gradient(120deg,var(--gold),var(--gold-deep));}
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);align-items:stretch;border-radius:var(--radius-lg);overflow:hidden;}
+.edition{padding:40px 30px;display:flex;flex-direction:column;background:var(--bg-alt);position:relative;transition:background .4s ease;}
+.edition:hover{background:var(--panel-2);}
+.edition.featured{background:linear-gradient(160deg,var(--blue-deep),#0a1442);}
+.edition.featured:hover{background:linear-gradient(160deg,#16307a,#0a1442);}
+.edition .badge{position:absolute;top:20px;right:20px;color:var(--gold-light);font-family:'Space Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+.edition .edtype{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.edition h3{font-size:23px;margin-bottom:8px;font-weight:800;}
+.edition .price{font-family:'Fraunces',serif;font-size:36px;font-weight:900;margin:18px 0;color:var(--heading);}
+.edition .price span{font-size:13px;font-weight:400;font-family:'Libre Franklin',sans-serif;color:var(--text-dim);}
+.edition .best-for{font-size:13px;color:var(--text-dim);font-style:italic;margin-bottom:20px;}
+.edition ul{margin:0 0 28px;flex-grow:1;}
+.edition ul li{font-size:14px;padding:11px 0;color:var(--text-soft);position:relative;padding-left:18px;}
+.edition ul li::before{content:'';position:absolute;left:0;top:18px;width:6px;height:6px;border-radius:50%;background:var(--gold);}
+.edition .btn{width:100%;text-align:center;}
+
+/* ============================================================
+   FAQ
+============================================================ */
+.faq{padding:130px 0;background:var(--panel);}
+.faq-list{max-width:820px;}
+.faq-item+.faq-item{border-top:1px solid var(--line);}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:26px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:'Fraunces',serif;font-size:19px;color:var(--heading);font-weight:700;}
+.faq-q .plus{font-family:'Space Mono',monospace;font-size:20px;color:var(--gold);transition:transform .4s var(--ease);flex-shrink:0;}
+.faq-item.open .faq-q .plus{transform:rotate(45deg);color:var(--blue-bright);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease);}
+.faq-a p{padding-bottom:26px;color:var(--text-dim);font-size:15px;max-width:660px;line-height:1.85;}
+
+/* ============================================================
+   AWARDS
+============================================================ */
+.awards{padding:100px 0;background:var(--bg);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.award-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center;}
+.award-icon{width:62px;height:62px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--panel);box-shadow:0 4px 20px rgba(0,0,0,.3);}
+.award-icon svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.award .a-name{font-family:'Fraunces',serif;color:var(--heading);font-size:16px;margin-bottom:6px;font-weight:800;}
+.award .a-year{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.08em;text-transform:uppercase;}
+
+/* ============================================================
+   CONTACT — 6 fields, Formspree powered
+============================================================ */
+.contact{padding:130px 0;background:var(--bg);position:relative;text-align:center;}
+.contact h2{font-size:clamp(32px,4.5vw,50px);max-width:700px;margin:20px auto 20px;font-weight:900;}
+.contact h2 em{font-style:italic;background:linear-gradient(100deg,var(--blue-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.contact-intro{color:var(--text-dim);max-width:520px;margin:0 auto 48px;font-size:16.5px;}
+.contact-form{max-width:640px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left;}
+.contact-form .full-width{grid-column:1/-1;}
+.field{position:relative;}
+.field input,.field textarea,.field select{width:100%;padding:18px 16px 8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);color:var(--heading);font-family:'Libre Franklin',sans-serif;font-size:14px;transition:border-color .3s ease;-webkit-appearance:none;appearance:none;}
+.field select{padding:16px;color:var(--text-soft);cursor:pointer;}
+.field label{position:absolute;left:16px;top:16px;font-size:14px;color:var(--text-dim);pointer-events:none;transition:all .25s ease;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold);}
+.field input:focus~label,.field input:not(:placeholder-shown)~label,.field textarea:focus~label,.field textarea:not(:placeholder-shown)~label{top:5px;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);}
+.contact-form button{grid-column:1/-1;justify-self:start;margin-top:8px;}
+.form-status{grid-column:1/-1;font-size:13.5px;font-weight:700;color:var(--gold-light);font-family:'Space Mono',monospace;min-height:18px;}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{background:var(--navy-deep);color:rgba(247,243,232,.6);padding:80px 0 34px;border-top:1px solid var(--line-soft);}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px;}
+.footer-brand{display:flex;gap:18px;align-items:flex-start;}
+.footer-brand .fb-text .logo{color:var(--heading);margin-bottom:16px;}
+.footer-brand p{color:rgba(247,243,232,.4);font-size:14px;max-width:280px;line-height:1.7;}
+.footer-col h4{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;}
+.footer-col a{display:block;color:rgba(247,243,232,.55);font-size:14px;margin-bottom:14px;transition:color .3s ease;}
+.footer-col a:hover{color:var(--gold-light);}
+.socials{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap;}
+.socials a{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--panel);border:1px solid var(--line);transition:all .3s ease;}
+.socials a svg{width:18px;height:18px;display:block;}
+.socials a.fb svg{fill:#4E8CF5;}
+.socials a.ig svg{fill:#F2568C;}
+.socials a.tt svg{fill:var(--text-soft);}
+.socials a.yt svg{fill:#F2564A;}
+.socials a.xx svg{fill:var(--text-soft);}
+.socials a:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 10px 24px var(--gold-glow);}
+.footer-bottom{border-top:1px solid var(--line-soft);padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(247,243,232,.4);}
+.footer-bottom a{color:rgba(247,243,232,.4);}
+.footer-bottom a:hover{color:var(--gold-light);}
+
+#back-to-top{position:fixed;bottom:32px;right:32px;width:46px;height:46px;border-radius:50%;background:linear-gradient(120deg,var(--blue),var(--gold-deep));border:none;color:#fff;font-size:17px;z-index:500;opacity:0;pointer-events:none;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease;box-shadow:0 10px 26px rgba(0,0,0,.4);}
+#back-to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+#back-to-top:hover{transform:translateY(-4px);}
+
+/* ============================================================
+   RESPONSIVE — everything stacks straight, nothing sideways
+============================================================ */
+@media(max-width:1080px){.price-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:980px){.footer-grid{grid-template-columns:1fr 1fr;}.award-grid{grid-template-columns:repeat(2,1fr);}.toolkit-grid{grid-template-columns:repeat(2,1fr);}.story-card{grid-template-columns:1fr;}.story-cover{max-width:280px;margin:0 auto;}}
+@media(max-width:880px){
+  .wrap{padding:0 24px;}
+  nav.wrap{padding:20px 24px;}
+  .navlinks{position:fixed;top:66px;left:0;right:0;background:var(--bg);flex-direction:column;padding:28px;gap:20px;transform:translateY(-160%);transition:transform .4s var(--ease);z-index:199;border-bottom:1px solid var(--line);}
+  .navlinks.open{transform:translateY(0);}
+  .menu-btn{display:block;}
+  .hero-grid{grid-template-columns:1fr;gap:50px;}
+  .about-grid{grid-template-columns:1fr;gap:50px;}
+  .core-grid,.price-grid,.toolkit-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-brand{flex-direction:column;}
+  .contact-form{grid-template-columns:1fr;}
+  .contact-form .full-width{grid-column:1;}
+  .tab-row{flex-direction:column;}
+  .award-grid{grid-template-columns:1fr 1fr;}
+  #cookieBar{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pre-mark">Sheila J. Washington</div>
+  <div class="pre-line"></div>
+  <span class="pre-sub">Book Marketing</span>
+</div>
+
+<div id="scroll-progress"></div>
+
+<!-- ROTATING HOOK BAR -->
+<div id="hookbar">
+  <div class="wrap hookbar-inner">
+    <span class="hb-star">&#9733;</span>
+    <span id="hookText">Turning Manuscripts Into Movements</span>
+    <span class="hb-star">&#9733;</span>
+  </div>
+</div>
+
+<div id="cookieBar">
+  <p>This site uses cookies to improve your experience. By continuing to browse you agree to our <a href="cookies.html">cookie policy</a>.</p>
+  <div class="cb-btns">
+    <button class="cb-accept" onclick="document.getElementById('cookieBar').classList.remove('show')">Accept All</button>
+    <button class="cb-decline" onclick="document.getElementById('cookieBar').classList.remove('show')">Decline</button>
+  </div>
+</div>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="logo"><span class="dot"></span>Sheila J. Washington</a>
+    <div class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#process">Process</a>
+      <a href="#services">Services</a>
+      <a href="#stories">Success Stories</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Let's Talk</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" id="top">
+  <div class="shape shape-ring" style="width:300px;height:300px;top:60px;right:8%;animation:float 6s ease-in-out infinite;"></div>
+  <div class="shape shape-dot" style="width:12px;height:12px;top:200px;left:12%;animation:float 4s ease-in-out 1s infinite;"></div>
+  <div class="shape shape-ring" style="width:80px;height:80px;bottom:140px;left:6%;animation:float 5s ease-in-out .5s infinite;"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Book Marketing And Launch Strategy</span>
+      <div class="typewrap"><span id="typewriter"></span></div>
+      <h1>I get books <em>talked about</em> before readers open the cover.</h1>
+      <p class="lede">Sheila J. Washington is a book marketer for authors and publishers who want a launch that outlasts release week, built on press, reader buzz, and campaigns engineered to sell copies.</p>
+      <div class="btn-row">
+        <a href="#contact" class="btn btn-primary">Let's Get Your Book Found</a>
+        <a href="#stories" class="btn btn-ghost">See My Work</a>
+      </div>
+    </div>
+    <div class="photo-frame photo-hero reveal">
+      <img src="Sheila  (5).png" alt="Sheila J. Washington">
+    </div>
+  </div>
+  <div class="wrap ticker-wrap">
+    <span class="ticker-label">Books I Champion</span>
+    <div class="ticker">
+      <span><b>Redeemed</b> by Rachael C. Duncan, biblical fiction</span>
+      <span><b>Game On Boys: The PlayStation Playoffs</b> by Kate Cullen, middle grade humor</span>
+      <span><b>Loving The Billionaire Army Doc</b> by Dobi Daniels, romance</span>
+      <span><b>Life After You</b> by Sian O'Gorman, womens fiction</span>
+      <span><b>Redeemed</b> by Rachael C. Duncan, biblical fiction</span>
+      <span><b>Game On Boys: The PlayStation Playoffs</b> by Kate Cullen, middle grade humor</span>
+      <span><b>Loving The Billionaire Army Doc</b> by Dobi Daniels, romance</span>
+      <span><b>Life After You</b> by Sian O'Gorman, womens fiction</span>
+    </div>
+  </div>
+</section>
+
+<div class="press-strip">
+  <div class="press-marquee">
+    <span>As Seen In <b>Publishers Weekly</b></span>
+    <span>As Seen In <b>BookRiot</b></span>
+    <span>As Seen In <b>The Millions</b></span>
+    <span>As Seen In <b>Kirkus Reviews</b></span>
+    <span>As Seen In <b>Literary Hub</b></span>
+    <span>As Seen In <b>Shelf Awareness</b></span>
+    <span>As Seen In <b>Publishers Weekly</b></span>
+    <span>As Seen In <b>BookRiot</b></span>
+    <span>As Seen In <b>The Millions</b></span>
+    <span>As Seen In <b>Kirkus Reviews</b></span>
+  </div>
+</div>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="photo-frame photo-about">
+        <img src="Sheila  (4).png" alt="Sheila J. Washington portrait">
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="num" data-count="80">0</div><div class="lbl">Titles Launched</div></div>
+        <div class="stat"><div class="num" data-count="14">0</div><div class="lbl">Bestsellers</div></div>
+        <div class="stat"><div class="num" data-count="9">0</div><div class="lbl">Years In Publishing</div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">About Sheila</span>
+      <h2 style="margin-top:18px;">Marketing built by someone who actually reads the book.</h2>
+      <div class="about-copy" style="margin-top:28px;">
+        <p>Sheila J. Washington has spent years championing authors long before anyone else believed in their books. She has built campaigns for faith based fiction, middle grade adventure, sweeping romance, and heartfelt womens fiction, treating every manuscript like it deserves a real spotlight rather than a form letter.</p>
+        <p>Her approach blends genuine press relationships, sharp content, and a real love of reading, so every campaign feels custom built for that specific book. Authors come to Sheila when they want more than a press release. They want someone who reads the whole manuscript, understands exactly who the audience is, and fights to put the book in front of readers who will love it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESS
+============================================================ -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow blue">How It Works</span>
+      <h2>From manuscript to bestseller list.</h2>
+      <p>Three paths depending on where you and your book are right now.</p>
+    </div>
+    <div class="tab-row reveal">
+      <button class="tab-btn active" data-tab="new-authors">New Authors</button>
+      <button class="tab-btn" data-tab="new-release">Existing Authors, New Release</button>
+      <button class="tab-btn" data-tab="backlist">Backlist Revival</button>
+    </div>
+    <div class="tab-panel active" id="tab-new-authors">
+      <div class="reveal-stagger">
+        <div class="tl-item"><div class="tl-num">01</div><div class="tl-content"><span class="tl-tag">Getting Started</span><h3>Discovery Session</h3><p>We learn about you, your book, and your goals for this launch. Every great campaign starts with understanding the story and the reader on the other side of the page.</p></div></div>
+        <div class="tl-item"><div class="tl-num">02</div><div class="tl-content"><span class="tl-tag">Building Your Identity</span><h3>Author Brand Foundation</h3><p>We build your author identity, social presence, and messaging from the ground up. Before readers can find your book, they need to be able to find you.</p></div></div>
+        <div class="tl-item"><div class="tl-num">03</div><div class="tl-content"><span class="tl-tag">Ninety Days Out</span><h3>Pre Launch Groundwork</h3><p>Advance copies go out, press lists are built, and early reviewers begin creating the quiet buzz that makes launch week land.</p></div></div>
+        <div class="tl-item"><div class="tl-num">04</div><div class="tl-content"><span class="tl-tag">Launch Week</span><h3>Launch Execution</h3><p>A coordinated release with press, content, and reader activation all timed to converge in the same seven days for maximum impact.</p></div></div>
+        <div class="tl-item"><div class="tl-num">05</div><div class="tl-content"><span class="tl-tag">Ongoing</span><h3>Growth And Sustainability</h3><p>We keep building your readership and platform well beyond publication day. Your first book is the foundation of everything that comes next.</p></div></div>
+      </div>
+    </div>
+    <div class="tab-panel" id="tab-new-release">
+      <div class="reveal-stagger">
+        <div class="tl-item"><div class="tl-num">01</div><div class="tl-content"><span class="tl-tag">Assessment</span><h3>Audience Audit</h3><p>We review your current readership, platform performance, and what worked and what did not on your previous release to build smarter this time.</p></div></div>
+        <div class="tl-item"><div class="tl-num">02</div><div class="tl-content"><span class="tl-tag">Strategy</span><h3>Campaign Blueprint</h3><p>A custom marketing plan built around your new title, existing audience, and publication timeline. No recycled templates here.</p></div></div>
+        <div class="tl-item"><div class="tl-num">03</div><div class="tl-content"><span class="tl-tag">Sixty Days Out</span><h3>Buzz Building</h3><p>Advance reviews, influencer outreach, and press pitching create genuine anticipation. Readers start talking before the book is available.</p></div></div>
+        <div class="tl-item"><div class="tl-num">04</div><div class="tl-content"><span class="tl-tag">Launch Week</span><h3>The Push</h3><p>Everything converges in a focused week of visibility, media coverage, and reader engagement designed to drive sales and attention.</p></div></div>
+        <div class="tl-item"><div class="tl-num">05</div><div class="tl-content"><span class="tl-tag">Post Launch</span><h3>Sustained Momentum</h3><p>Ongoing marketing keeps your book selling and your audience growing for months after release. The work does not stop when launch week ends.</p></div></div>
+      </div>
+    </div>
+    <div class="tab-panel" id="tab-backlist">
+      <div class="reveal-stagger">
+        <div class="tl-item"><div class="tl-num">01</div><div class="tl-content"><span class="tl-tag">Looking Back</span><h3>Performance Analysis</h3><p>We review what happened the first time around and identify the missed opportunities, underserved audiences, and angles that were never explored.</p></div></div>
+        <div class="tl-item"><div class="tl-num">02</div><div class="tl-content"><span class="tl-tag">Fresh Angle</span><h3>Repositioning</h3><p>A new message, updated positioning, and a revised approach to reaching the readers this book always deserved but never found.</p></div></div>
+        <div class="tl-item"><div class="tl-num">03</div><div class="tl-content"><span class="tl-tag">Re Launch</span><h3>Fresh Campaign</h3><p>A focused push with new press outreach, reader activation, and content strategy that treats this book like the release it should have had.</p></div></div>
+        <div class="tl-item"><div class="tl-num">04</div><div class="tl-content"><span class="tl-tag">Long Term</span><h3>Ongoing Growth</h3><p>Sustained marketing that keeps this book relevant and visible to new readers, building the long tail every great backlist title deserves.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES — every service has its own icon
+============================================================ -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Services</span>
+      <h2>Everything a book needs to find its readers.</h2>
+      <p>Six core services and a full toolkit of specialized offerings. Mix and match whatever your launch requires.</p>
+    </div>
+    <div class="core-grid reveal-stagger">
+      <div class="core-card">
+        <svg class="svc-icon" viewBox="0 0 24 24"><path d="M12 2L8 14h8L12 2z"/><path d="M10 14v6M14 14v6M7 22h10"/></svg>
+        <h3>Book Launch Strategy</h3>
+        <p>A full release plan with timeline, milestones, budget guidance, and the coordinated approach that turns a publication date into an event readers remember.</p>
+      </div>
+      <div class="core-card">
+        <svg class="svc-icon" viewBox="0 0 24 24"><path d="M6 10v6h3l7 5V5l-7 5H6z"/><path d="M20 9c1.5 1.5 1.5 4.5 0 6"/></svg>
+        <h3>Press And Media Relations</h3>
+        <p>Targeted pitching to reviewers, literary outlets, podcasts, and media contacts who cover your genre, plus preparation for every interview and feature.</p>
+      </div>
+      <div class="core-card">
+        <svg class="svc-icon" viewBox="0 0 24 24"><path d="M12 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+        <h3>Author Brand Development</h3>
+        <p>Positioning and identity work for authors building a career, not just releasing a single title. We craft the message readers will associate with your name.</p>
+      </div>
+      <div class="core-card">
+        <svg class="svc-icon" viewBox="0 0 24 24"><path d="M16 3l5 5L8 21H3v-5L16 3z"/><path d="M14 5l5 5"/></svg>
+        <h3>Content And Copywriting</h3>
+        <p>Back cover copy, newsletter sequences, social content, author bios, and every piece of writing your campaign needs, all in a voice that sounds like the book itself.</p>
+      </div>
+      <div class="core-card">
+        <svg class="svc-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M3 21c0-4 3-7 6-7s6 3 6 7"/><circle cx="17" cy="8" r="3"/><path d="M17 13c3 0 5 2.5 5 5.5"/></svg>
+        <h3>Reader Community Building</h3>
+        <p>Advance copy distribution, early reviewer outreach, book club engagement, and the reader conversations that get a book talked about long before it is for sale.</p>
+      </div>
+      <div class="core-card">
+        <svg class="svc-icon" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0114-5"/><path d="M20 12a8 8 0 01-14 5"/><path d="M18 3v4h-4"/><path d="M6 21v-4h4"/></svg>
+        <h3>Backlist Revival</h3>
+        <p>A second campaign for a book that deserved more attention the first time. New positioning, fresh press, and a strategy that gives your backlist the spotlight it missed.</p>
+      </div>
+    </div>
+
+    <h3 class="toolkit-heading reveal">The Full Toolkit</h3>
+
+    <div class="toolkit-grid reveal-stagger">
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M10 18h4"/></svg><span class="ti-text">Social Media Management</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><path d="M4 7h16M4 7l2-4h12l2 4M5 7v12a2 2 0 002 2h10a2 2 0 002-2V7"/><path d="M10 11h4"/></svg><span class="ti-text">Amazon And Retailer Optimization</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 5l9 7 9-7"/></svg><span class="ti-text">Email And Newsletter Strategy</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z"/></svg><span class="ti-text">Book Trailers And Video Content</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg><span class="ti-text">Blog Tours And Virtual Events</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M8 4l1-2h6l1 2"/></svg><span class="ti-text">BookTok And Bookstagram Campaigns</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><path d="M4 8l8-5 8 5v8l-8 5-8-5z"/><path d="M4 8l8 5 8-5"/><path d="M12 13v10"/></svg><span class="ti-text">ARC And Review Management</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><path d="M8 2h8v7c0 3-2 5-4 5s-4-2-4-5V2z"/><path d="M8 4H5c0 3 1.5 5 3 5"/><path d="M16 4h3c0 3-1.5 5-3 5"/><path d="M10 14v2h4v-2"/><path d="M8 20h8"/></svg><span class="ti-text">Award Submission Strategy</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><path d="M4 4c0-1 1-2 3-2h4v20H7c-2 0-3-1-3-2z"/><path d="M11 2h5c2 0 3 1 3 2v16c0 1-1 2-3 2h-5"/></svg><span class="ti-text">Library And Book Club Outreach</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="10" rx="3"/><path d="M5 10c0 4 3 7 7 7s7-3 7-7"/><path d="M12 17v4M8 21h8"/></svg><span class="ti-text">Podcast Placement And Preparation</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><path d="M4 20h16"/><rect x="6" y="12" width="3" height="8"/><rect x="11" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></svg><span class="ti-text">Digital Advertising And SEO</span></div>
+      <div class="toolkit-item"><svg class="svc-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 2v4M16 2v4"/></svg><span class="ti-text">Pre Order And Series Marketing</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SUCCESS STORIES — merged portfolio + testimonial section
+     Note: card copy below is written by Sheila's team describing
+     each campaign's focus. It is not presented as a direct quote
+     from the author. The single reflective paragraph beneath the
+     slider is written in Sheila's own voice.
+============================================================ -->
+<section class="stories" id="stories">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Success Stories</span>
+      <h2>A few of the books I love working on.</h2>
+      <p>Real titles across the genres I know best.</p>
+    </div>
+    <div class="story-slider reveal">
+      <div class="story-card active" data-idx="0">
+        <div class="story-cover"><img src="redeemed.png" alt="Redeemed book cover"></div>
+        <div class="story-body">
+          <span class="tag">Biblical Historical Fiction</span>
+          <h3>Redeemed</h3>
+          <p class="byline">By Rachael C. Duncan</p>
+          <p>A biblical fiction retelling that brings the story of Ruth and Boaz to life through Adara and Kemuel, a young couple facing the ache of childlessness in a world that saw it as a curse.</p>
+          <div class="story-focus">Genre Focus: Faith Based And Biblical Fiction</div>
+        </div>
+      </div>
+      <div class="story-card" data-idx="1">
+        <div class="story-cover"><img src="game.png" alt="Game On Boys book cover"></div>
+        <div class="story-body">
+          <span class="tag">Middle Grade Humor</span>
+          <h3>Game On Boys: The PlayStation Playoffs</h3>
+          <p class="byline">By Kate Cullen</p>
+          <p>A hilarious chapter book following ten year old gamer Ryan James and his PlayStation club, written to pull reluctant readers off their consoles and into a book they cannot put down.</p>
+          <div class="story-focus">Genre Focus: Middle Grade And Reluctant Readers</div>
+        </div>
+      </div>
+      <div class="story-card" data-idx="2">
+        <div class="story-cover"><img src="billionaire.png" alt="Loving The Billionaire Army Doc book cover"></div>
+        <div class="story-body">
+          <span class="tag">Contemporary Romance</span>
+          <h3>Loving The Billionaire Army Doc</h3>
+          <p class="byline">By Dobi Daniels</p>
+          <p>A swoon worthy billionaire romance pairing a decorated army doctor with a love story built for readers who want heart racing chemistry and a happily ever after.</p>
+          <div class="story-focus">Genre Focus: Billionaire And Contemporary Romance</div>
+        </div>
+      </div>
+      <div class="story-card" data-idx="3">
+        <div class="story-cover"><img src="lifeafteryou.png" alt="Life After You book cover"></div>
+        <div class="story-body">
+          <span class="tag">Womens Fiction</span>
+          <h3>Life After You</h3>
+          <p class="byline">By Sian O'Gorman</p>
+          <p>An emotional Irish novel following Milly Bryne as she rebuilds her life after loss, written for readers who love Cecelia Ahern and Cathy Kelly.</p>
+          <div class="story-focus">Genre Focus: Womens Fiction And Healing Stories</div>
+        </div>
+      </div>
+      <div class="story-dots">
+        <button class="story-dot active" data-slide="0"></button>
+        <button class="story-dot" data-slide="1"></button>
+        <button class="story-dot" data-slide="2"></button>
+        <button class="story-dot" data-slide="3"></button>
+      </div>
+    </div>
+
+    <div class="sheila-words reveal">
+      <p>Working across such different worlds keeps me sharp. Redeemed asked me to honor a biblical story with the reverence it deserved. Game On Boys asked me to think like a ten year old gamer and get a book into the hands of reluctant readers. Loving The Billionaire Army Doc asked for pure swoon and momentum. Life After You asked me to sit with grief and healing and still leave room for hope. Every one of these books taught me something new about the reader on the other side of the page, and that is exactly why I do this work.</p>
+      <div class="sw-sign">Sheila J. Washington, Book Marketer</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRICING
+============================================================ -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Packages</span>
+      <h2>Pick your edition.</h2>
+      <p>Every package is built around your launch date and goals. These are starting points, not fixed menus.</p>
+    </div>
+    <div class="toggle-row reveal">
+      <span class="active-label" id="labelMonthly">Monthly Retainer</span>
+      <div class="switch" id="pricingSwitch"></div>
+      <span id="labelProject">Project Based</span>
+    </div>
+    <div class="price-grid reveal-stagger">
+      <div class="edition">
+        <span class="edtype">Paperback</span>
+        <h3>Essentials</h3>
+        <div class="price"><span class="price-amt" data-monthly="$1,200" data-project="$3,200">$1,200</span> <span class="price-suffix">/ month</span></div>
+        <p class="best-for">Best for new authors with a single title</p>
+        <ul><li>Press list and pitching, regional</li><li>Launch timeline and checklist</li><li>Back cover and newsletter copy</li><li>Monthly strategy session</li></ul>
+        <a href="#contact" class="btn btn-ghost">Choose Essentials</a>
+      </div>
+      <div class="edition featured">
+        <span class="badge">Most Booked</span>
+        <span class="edtype">Hardcover</span>
+        <h3>Full Launch</h3>
+        <div class="price"><span class="price-amt" data-monthly="$2,800" data-project="$7,500">$2,800</span> <span class="price-suffix">/ month</span></div>
+        <p class="best-for">Best for authors ready for a full scale launch</p>
+        <ul><li>National press and podcast pitching</li><li>Advance copy and reader buzz campaign</li><li>Full content and copy suite</li><li>Weekly strategy sessions</li><li>Launch week dedicated support</li></ul>
+        <a href="#contact" class="btn btn-gold">Choose Full Launch</a>
+      </div>
+      <div class="edition">
+        <span class="edtype">Second Edition</span>
+        <h3>Backlist Revival</h3>
+        <div class="price"><span class="price-amt" data-monthly="$1,800" data-project="$4,500">$1,800</span> <span class="price-suffix">/ month</span></div>
+        <p class="best-for">Best for published authors with an underperforming title</p>
+        <ul><li>New positioning and angle</li><li>Fresh press and media push</li><li>Long term platform building</li><li>Quarterly strategy reviews</li></ul>
+        <a href="#contact" class="btn btn-ghost">Choose Revival</a>
+      </div>
+      <div class="edition">
+        <span class="edtype">Special Edition</span>
+        <h3>Custom</h3>
+        <div class="price">Let's Discuss</div>
+        <p class="best-for">Best for publishers, multi book authors, or unique projects</p>
+        <ul><li>Fully tailored to your book</li><li>Choose any combination of services</li><li>Flexible timelines and scope</li><li>Direct collaboration on every detail</li></ul>
+        <a href="#contact" class="btn btn-ghost">Start The Conversation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ — expanded
+============================================================ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions authors usually ask.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <button class="faq-q">How far in advance should I start? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Ideally ninety days before your publication date, since press and advance copies need lead time. That said, I have built effective thirty day sprints too, so reach out even if your launch is close.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you work with independently published authors? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes, about half my clients publish independently. The strategy shifts slightly, more reader community focus and less trade press, but the process stays the same and the results speak for themselves.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What genres do you specialize in? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Faith based and biblical fiction, middle grade adventure, romance, and womens fiction are my strongest areas, though I welcome new genres too. If you have a great book and need it found, I want to hear about it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can you guarantee bestseller status? <span class="plus">+</span></button>
+        <div class="faq-a"><p>No one honestly can, but I can guarantee a coordinated, well timed campaign built on real press relationships and a clear message, which gives a book its best possible shot at the visibility it deserves.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How do we get started? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Fill out the contact form below with your book details and goals. I will follow up within two business days to schedule an introductory session where we can discuss your project in detail.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What does a typical timeline look like? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Most campaigns run three to six months depending on the scope. The first month is strategy and preparation, the second month builds buzz, and launch month is full activation. Post launch support continues as long as you need it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you offer payment plans? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. Monthly retainer pricing is already structured as a payment plan, and project based pricing can be split into installments. I want to make sure budget is not a barrier for a great book.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you offer a free consultation? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. Every new inquiry starts with a complimentary conversation about your book and your goals so we can figure out together whether we are the right fit before anything is booked.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What makes you different from other book marketers? <span class="plus">+</span></button>
+        <div class="faq-a"><p>I actually read the full manuscript before building a strategy. Every campaign is built fresh around that specific book and its readers, never a recycled template dropped onto a new cover.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I see a sample marketing plan? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. During our first conversation I will walk you through the structure of a typical plan so you know exactly what to expect before committing to anything.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you work with publishers as well as individual authors? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. Small presses without an in house marketing department are some of my favorite clients, and I can work across an entire catalog or focus on a single title.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What if my budget is limited? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Tell me your budget honestly on the contact form and I will tell you honestly what is realistic within it. The Essentials package plus a flexible payment plan works well for many first time authors.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AWARDS
+============================================================ -->
+<section class="awards" id="awards">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center;max-width:none;">
+      <span class="eyebrow" style="justify-content:center;">Recognition</span>
+      <h2>Awards and features.</h2>
+    </div>
+    <div class="award-grid reveal-stagger">
+      <div class="award"><div class="award-icon"><svg viewBox="0 0 24 24"><path d="M8 2h8v7c0 3-2 5-4 5s-4-2-4-5V2z"/><path d="M8 4H5c0 3 1.5 5 3 5"/><path d="M16 4h3c0 3-1.5 5-3 5"/><path d="M10 14v2h4v-2"/><path d="M7 20h10"/><path d="M9 20v-4M15 20v-4"/></svg></div><div class="a-name">Indie Press Award</div><div class="a-year">Marketing Campaign, 2025</div></div>
+      <div class="award"><div class="award-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4l-6.4 4.8 2.4-7.2-6-4.8h7.6z"/></svg></div><div class="a-name">Publishers Weekly Star Pick</div><div class="a-year">Launch Of The Year, 2024</div></div>
+      <div class="award"><div class="award-icon"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="10" rx="3"/><path d="M5 10c0 4 3 7 7 7s7-3 7-7"/><path d="M12 17v4M8 21h8"/></svg></div><div class="a-name">Book Biz Podcast</div><div class="a-year">Featured Guest, 2025</div></div>
+      <div class="award"><div class="award-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M8 4l1-2h6l1 2"/></svg></div><div class="a-name">Bookstagram Choice</div><div class="a-year">Best Campaign, 2026</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT — 6 fields only, submits to Formspree
+============================================================ -->
+<section class="contact" id="contact">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="justify-content:center;">Get In Touch</span>
+    <h2>Let's put your book in front of the <em>readers waiting for it.</em></h2>
+    <p class="contact-intro">Tell me a bit about your book and your goals. I will follow up within two business days.</p>
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/meebwkvl" method="POST">
+      <div class="field">
+        <input type="text" placeholder=" " required id="ffirst" name="First Name">
+        <label for="ffirst">First Name</label>
+      </div>
+      <div class="field">
+        <input type="text" placeholder=" " required id="flast" name="Last Name">
+        <label for="flast">Last Name</label>
+      </div>
+      <div class="field full-width">
+        <input type="text" placeholder=" " required id="fbook" name="Book Name">
+        <label for="fbook">Book Name</label>
+      </div>
+      <div class="field full-width">
+        <select id="fbudget" name="Budget Range" required>
+          <option value="" disabled selected>Budget Range</option>
+          <option>Under $1,000</option>
+          <option>$1,000 to $3,000</option>
+          <option>$3,000 to $5,000</option>
+          <option>$5,000 to $10,000</option>
+          <option>$10,000 and above</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="field full-width">
+        <textarea rows="4" placeholder=" " id="fgoals" name="Specific Goals" required></textarea>
+        <label for="fgoals">Specific Goals</label>
+      </div>
+      <div class="field full-width">
+        <textarea rows="4" placeholder=" " id="finfo" name="Additional Info"></textarea>
+        <label for="finfo">Additional Info</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+      <div class="form-status" id="formStatus"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="photo-frame photo-footer">
+          <img src="Sheila  (2).png" alt="Sheila J. Washington">
+        </div>
+        <div class="fb-text">
+          <a href="#top" class="logo"><span class="dot"></span>Sheila J. Washington</a>
+          <p>Book marketing and launch strategy for authors and independent presses who want their book to be impossible to ignore.</p>
+          <div class="socials">
+            <a href="#" class="fb" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06C2 17.06 5.66 21.2 10.44 21.95V14.9H7.9v-2.84h2.54v-2.17c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.84h2.77l-.44 2.84h-2.33v7.05C18.34 21.2 22 17.06 22 12.06z"/></svg></a>
+            <a href="#" class="ig" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 01-1.15 1.77 4.9 4.9 0 01-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 01-1.77-1.15 4.9 4.9 0 01-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 015.45.53C6.09.28 6.82.11 7.88.06 8.94.01 9.28 0 12 0zm0 5a5 5 0 100 10 5 5 0 000-10zm0 8.25a3.25 3.25 0 110-6.5 3.25 3.25 0 010 6.5zm5.2-8.45a1.17 1.17 0 110-2.34 1.17 1.17 0 010 2.34z" transform="translate(0,2)"/></svg></a>
+            <a href="#" class="tt" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.5 2h-3.2v13.4a2.6 2.6 0 11-1.85-2.49v-3.3a5.9 5.9 0 105.05 5.84V8.1a7.8 7.8 0 004.5 1.43V6.35A4.6 4.6 0 0116.5 2z"/></svg></a>
+            <a href="#" class="yt" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.4-.44-5.02a3 3 0 00-2.1-2.1C18.86 4.44 12 4.44 12 4.44s-6.86 0-8.46.44a3 3 0 00-2.1 2.1C1 8.6 1 12 1 12s0 3.4.44 5.02a3 3 0 002.1 2.1c1.6.44 8.46.44 8.46.44s6.86 0 8.46-.44a3 3 0 002.1-2.1C23 15.4 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+            <a href="#" class="xx" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 2.5h3.3l-7.2 8.2 8.5 10.8h-6.6l-5.2-6.6-5.9 6.6H2.4l7.7-8.8L2 2.5h6.8l4.7 6.1 5.4-6.1zm-1.2 17h1.8L7.4 4.4H5.5l12.2 15.1z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Site</h4><a href="#about">About</a><a href="#services">Services</a><a href="#stories">Success Stories</a><a href="#pricing">Pricing</a></div>
+      <div class="footer-col"><h4>Resources</h4><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="#awards">Awards</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:sheilajwashington680@gmail.com">sheilajwashington680@gmail.com</a><a href="#">Working with authors worldwide</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Sheila J. Washington Book Marketing. All rights reserved.</span>
+      <span><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms and Conditions</a> &middot; <a href="cookies.html">Cookie Policy</a></span>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">&uarr;</button>
+
+<script>
+/* PRELOADER + COOKIE BAR */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('preloader').classList.add('hide'), 700);
+  setTimeout(() => document.getElementById('cookieBar').classList.add('show'), 2000);
+});
+
+/* ROTATING HOOK BAR TEXT */
+const hookPhrases = [
+  "Turning Manuscripts Into Movements",
+  "Your Book Deserves A Real Launch",
+  "From First Draft To Bestseller List",
+  "Every Great Book Needs A Champion"
+];
+let hookIdx = 0;
+const hookEl = document.getElementById('hookText');
+setInterval(() => {
+  hookIdx = (hookIdx + 1) % hookPhrases.length;
+  hookEl.style.animation = 'none';
+  void hookEl.offsetWidth;
+  hookEl.textContent = hookPhrases[hookIdx];
+  hookEl.style.animation = 'fadeSwap 4s ease infinite';
+}, 4000);
+
+/* SCROLL PROGRESS + HEADER + BACK TO TOP */
+const progressBar = document.getElementById('scroll-progress');
+const header = document.getElementById('siteHeader');
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  progressBar.style.width = pct + '%';
+  header.classList.toggle('scrolled', h.scrollTop > 40);
+  backToTop.classList.toggle('show', h.scrollTop > 600);
+});
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* MOBILE MENU */
+const menuBtn = document.getElementById('menuBtn');
+const navlinks = document.getElementById('navlinks');
+menuBtn.addEventListener('click', () => { navlinks.classList.toggle('open'); menuBtn.classList.toggle('open'); });
+navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navlinks.classList.remove('open'); menuBtn.classList.remove('open'); }));
+
+/* TYPEWRITER */
+const phrases = ["Launch strategy that sells copies.", "Press coverage, engineered.", "Reader buzz before day one.", "Backlist titles, revived.", "Your book deserves to be found."];
+const twEl = document.getElementById('typewriter');
+let pIdx = 0, cIdx = 0, deleting = false;
+function typeLoop() {
+  const current = phrases[pIdx];
+  if (!deleting) {
+    cIdx++;
+    twEl.innerHTML = current.slice(0, cIdx) + '<span class="cursor-blink">&nbsp;</span>';
+    if (cIdx === current.length) { deleting = true; setTimeout(typeLoop, 1800); return; }
+  } else {
+    cIdx--;
+    twEl.innerHTML = current.slice(0, cIdx) + '<span class="cursor-blink">&nbsp;</span>';
+    if (cIdx === 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; }
+  }
+  setTimeout(typeLoop, deleting ? 30 : 55);
+}
+typeLoop();
+
+/* SCROLL REVEAL */
+const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+/* NUMBER COUNTERS */
+const counters = document.querySelectorAll('.num[data-count]');
+const cio = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.count);
+      let cur = 0;
+      const step = Math.max(1, Math.ceil(target / 45));
+      const tick = () => {
+        cur += step;
+        if (cur >= target) { el.textContent = target + (target >= 50 ? '+' : ''); }
+        else { el.textContent = cur; setTimeout(tick, 28); }
+      };
+      tick();
+      cio.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => cio.observe(c));
+
+/* PROCESS TABS */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('tab-' + btn.dataset.tab);
+    panel.classList.add('active');
+    const stagger = panel.querySelector('.reveal-stagger');
+    if (stagger) { stagger.classList.remove('in'); void stagger.offsetWidth; stagger.classList.add('in'); }
+  });
+});
+
+/* SUCCESS STORY SLIDER */
+const storyCards = document.querySelectorAll('.story-card');
+const storyDots = document.querySelectorAll('.story-dot');
+let storyIdx = 0;
+let storyAuto;
+function goToStory(idx) {
+  storyCards.forEach(c => c.classList.remove('active'));
+  storyDots.forEach(d => d.classList.remove('active'));
+  storyCards[idx].classList.add('active');
+  storyDots[idx].classList.add('active');
+  storyIdx = idx;
+}
+storyDots.forEach(dot => dot.addEventListener('click', () => { goToStory(parseInt(dot.dataset.slide)); resetStoryAuto(); }));
+function nextStory() { goToStory((storyIdx + 1) % storyCards.length); }
+function resetStoryAuto() { clearInterval(storyAuto); storyAuto = setInterval(nextStory, 6000); }
+storyAuto = setInterval(nextStory, 6000);
+
+/* PRICING TOGGLE */
+const pSwitch = document.getElementById('pricingSwitch');
+const labelMonthly = document.getElementById('labelMonthly');
+const labelProject = document.getElementById('labelProject');
+let isProject = false;
+pSwitch.addEventListener('click', () => {
+  isProject = !isProject;
+  pSwitch.classList.toggle('on', isProject);
+  labelMonthly.classList.toggle('active-label', !isProject);
+  labelProject.classList.toggle('active-label', isProject);
+  document.querySelectorAll('.price-amt').forEach(el => { el.textContent = isProject ? el.dataset.project : el.dataset.monthly; });
+  document.querySelectorAll('.price-suffix').forEach(el => { el.textContent = isProject ? '/ project' : '/ month'; });
+});
+
+/* FAQ ACCORDION */
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  if (item.classList.contains('open')) a.style.maxHeight = a.scrollHeight + 'px';
+  q.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = null; });
+    if (!isOpen) { item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+  });
+});
+
+/* CONTACT FORM — submits to Formspree via fetch, shows inline status */
+const form = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  formStatus.textContent = 'Sending...';
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    if (response.ok) {
+      formStatus.textContent = 'Message sent. Sheila will reply within two business days.';
+      form.reset();
+    } else {
+      formStatus.textContent = 'Something went wrong. Please email sheilajwashington680@gmail.com directly.';
+    }
+  }).catch(() => {
+    formStatus.textContent = 'Something went wrong. Please email sheilajwashington680@gmail.com directly.';
+  });
+});
+
+/* SMOOTH ANCHOR OFFSET */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 90;
+      const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: pos, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
